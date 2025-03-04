@@ -4,7 +4,7 @@
 [![Unity Pipeline Support (URP)](https://img.shields.io/badge/URP_✔️-blue?logo=unity)](https://unity3d.com/get-unity/download)
 [![Unity Pipeline Support (HDRP)](https://img.shields.io/badge/HDRP_✔️-darkred?logo=unity)](https://unity3d.com/get-unity/download)
 
-**Available on Asset Store:** *Later*
+**Available on Asset Store:** https://assetstore.unity.com/packages/tools/utilities/modular-footstep-system-303673
 
 This plugin is designed to add footstep effects (such as sounds, traces, and particles) to game entities.
 
@@ -49,7 +49,7 @@ There are 3 ways to install this plugin:
 
 - import [MFS.unitypackage](https://github.com/dimdimich123/UnityDecalFootsteps/releases) via *Assets-Import Package*
 - clone/download this repository and move the **ModularFootstepSystem** folder to your Unity project's **Assets** folder
-- import it from Asset Store (Later)
+- import it from [Asset Store](https://assetstore.unity.com/packages/tools/utilities/modular-footstep-system-303673)
 
 ## User Guide:
 You can find the user guide in the repository under the path [Assets\ModularFootstepSystem\ModularFootstepSystemManual.pdf](Assets/ModularFootstepSystem/ModularFootstepSystemManual.pdf) or in the Unity package files under *ModularFootstepSystem\ModularFootstepSystemManual*.
