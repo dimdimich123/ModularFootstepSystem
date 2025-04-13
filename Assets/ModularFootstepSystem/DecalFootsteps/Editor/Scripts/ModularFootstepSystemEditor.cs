@@ -88,8 +88,10 @@ namespace ModularFootstepSystem.Editor
         protected SerializedObject groundDetectorObject = default;
         protected SerializedProperty footTransformProperty = default;
         protected SerializedProperty detectingDistanceToGroundProperty = default;
-        protected SerializedProperty footUpPositionShiftProperty = default;
-
+        protected SerializedProperty footPositionShiftProperty = default;
+        protected SerializedProperty detectingLayersProperty = default;
+        protected SerializedProperty drawGizmosProperty = default;
+        protected SerializedProperty footMarkSizeProperty = default;
 
         protected FootHandler editFootHandler = default;
         protected SerializedObject footHandlerObject = default;
@@ -328,7 +330,7 @@ namespace ModularFootstepSystem.Editor
             GUILayout.Space(10);
 
 
-            GUILayout.Label("Enter the name of the foot and click «+» to add it");
+            GUILayout.Label("Enter the name of the foot and click Â«+Â» to add it");
             GUILayout.BeginHorizontal();
             GUILayout.Label("New foot name:", GUILayout.Width(100));
             newFootHandlerName = EditorGUILayout.TextField(newFootHandlerName);
@@ -502,7 +504,10 @@ namespace ModularFootstepSystem.Editor
             groundDetectorObject = new SerializedObject(editGroundDetector);
             footTransformProperty = groundDetectorObject.FindProperty("footTranform");
             detectingDistanceToGroundProperty = groundDetectorObject.FindProperty("detectingDistanceToGround");
-            footUpPositionShiftProperty = groundDetectorObject.FindProperty("footUpPositionShift");
+            footPositionShiftProperty = groundDetectorObject.FindProperty("footPositionShift");
+            detectingLayersProperty = groundDetectorObject.FindProperty("detectingLayers");
+            drawGizmosProperty = groundDetectorObject.FindProperty("drawGizmos");
+            footMarkSizeProperty = groundDetectorObject.FindProperty("footMarkSize");
         }
 
         protected Vector2 scrollPosition = Vector2.zero;
@@ -551,10 +556,28 @@ namespace ModularFootstepSystem.Editor
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField(footUpPositionShiftProperty.displayName, GUILayout.Width(175));
-            EditorGUILayout.PropertyField(footUpPositionShiftProperty, GUIContent.none);
+            EditorGUILayout.LabelField(footPositionShiftProperty.displayName, GUILayout.Width(175));
+            EditorGUILayout.PropertyField(footPositionShiftProperty, GUIContent.none);
             GUILayout.EndHorizontal();
-
+            
+            GUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField(detectingLayersProperty.displayName, GUILayout.Width(175));
+            EditorGUILayout.PropertyField(detectingLayersProperty, GUIContent.none);
+            GUILayout.EndHorizontal();
+            
+            
+            GUILayout.Space(20);
+            GUILayout.Label($"Gizmos settings", skin.customStyles[4]);
+            GUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField(drawGizmosProperty.displayName, GUILayout.Width(175));
+            EditorGUILayout.PropertyField(drawGizmosProperty, GUIContent.none);
+            GUILayout.EndHorizontal();
+            
+            GUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField(footMarkSizeProperty.displayName, GUILayout.Width(175));
+            EditorGUILayout.PropertyField(footMarkSizeProperty, GUIContent.none);
+            GUILayout.EndHorizontal();
+            
             GUILayout.EndVertical();
         }
 

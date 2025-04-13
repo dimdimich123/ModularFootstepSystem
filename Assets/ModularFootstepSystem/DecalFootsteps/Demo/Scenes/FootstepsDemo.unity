@@ -2652,7 +2652,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   footTranform: {fileID: 5423635854324646257}
   detectingDistanceToGround: 0.4
-  footUpPositionShift: 0.1
+  footPositionShift: {x: 0.0005, y: -0.0025, z: 0.002}
+  detectingLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  drawGizmos: 1
+  footMarkSize: 0.05
 --- !u!1 &407782067
 GameObject:
   m_ObjectHideFlags: 0
@@ -15942,7 +15947,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   footTranform: {fileID: 140033211841876927}
   detectingDistanceToGround: 0.4
-  footUpPositionShift: 0.1
+  footPositionShift: {x: 0, y: -0.0025, z: 0.002}
+  detectingLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  drawGizmos: 1
+  footMarkSize: 0.05
 --- !u!1 &9224006771706620
 GameObject:
   m_ObjectHideFlags: 0
