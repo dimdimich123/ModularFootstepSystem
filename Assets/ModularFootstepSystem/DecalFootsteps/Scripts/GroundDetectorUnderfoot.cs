@@ -1,3 +1,5 @@
+using System;
+
 namespace ModularFootstepSystem
 {
     using UnityEngine;
@@ -9,9 +11,7 @@ namespace ModularFootstepSystem
     public class GroundDetectorUnderfoot : MonoBehaviour
     {
         protected const float MIN_DETECTING_DISTANCE_TO_GROUND = 0.01f;
-
-        protected const int MIN_FOOT_UP_POSITION_SHIFT = 0;
-
+        
         /// <summary>
         /// Type of surface underfoot.
         /// </summary>
@@ -37,9 +37,12 @@ namespace ModularFootstepSystem
 
         [SerializeField, Min(MIN_DETECTING_DISTANCE_TO_GROUND)]
         protected float detectingDistanceToGround = 0.4f;
-        [SerializeField, Min(MIN_FOOT_UP_POSITION_SHIFT)]
-        protected float footUpPositionShift = 0.1f;
+        
+        [SerializeField]
+        protected Vector3 footPositionShift = Vector3.zero;
 
+        [SerializeField] protected LayerMask detectingLayers = 1 << 0;
+        
         protected Vector3 positionOfGroundUnderfoot = Vector3.zero;
         protected Vector3 stepDirection = Vector3.zero;
         protected Vector3 shiftedFootPosition = Vector3.zero;
@@ -64,10 +67,7 @@ namespace ModularFootstepSystem
         /// </remarks>
         public virtual void DetectGround()
         {
-            shiftedFootPosition = footTranform.position;
-            shiftedFootPosition.y += footUpPositionShift;
-
-            if (Physics.Raycast(shiftedFootPosition, Vector3.down, out hit, detectingDistanceToGround))
+            if (Physics.Raycast(footTranform.TransformPoint(footPositionShift), Vector3.down, out hit, detectingDistanceToGround, detectingLayers))
             {
                 if(hit.transform.TryGetComponent(out surface))
                 {
@@ -85,5 +85,31 @@ namespace ModularFootstepSystem
                 isGrounded = false;
             }
         }
+
+#region Editor_Logic
+#if UNITY_EDITOR
+        [SerializeField] protected bool drawGizmos = true;
+
+        [SerializeField] protected float footMarkSize = 0.05f;
+        
+        protected virtual void OnDrawGizmosSelected()
+        {
+            if (!footTranform || !drawGizmos)
+            {
+                return;
+            }
+
+            shiftedFootPosition = footTranform.TransformPoint(footPositionShift);
+            
+            Gizmos.color = Color.red;
+            Gizmos.DrawSphere(shiftedFootPosition, footMarkSize);
+            
+            Gizmos.color = Color.blue;
+            Vector3 drawTo = shiftedFootPosition;
+            drawTo.y -= detectingDistanceToGround;
+            Gizmos.DrawLine(shiftedFootPosition, drawTo);
+        }
+#endif
+#endregion
     }
 }
