@@ -836,6 +836,21 @@ namespace ModularFootstepSystem.Editor
                 }
                 GUILayout.EndHorizontal();
             }
+            
+            if (!DecalEnabler.IsDecalsEnabled())
+            {
+                EditorGUILayout.Space(10);
+                EditorStyles.helpBox.fontSize += 2;
+                EditorGUILayout.HelpBox(
+                    "To display footprints correctly, the Decal feature must be enabled. Enable this feature for the current Render Pipeline Asset?",
+                    MessageType.Error);
+                EditorStyles.helpBox.fontSize -= 2;
+                    
+                if (GUILayout.Button("Enable Decals", GUILayout.Width(100)))
+                {
+                    DecalEnabler.EnableDecals();
+                }
+            }
         }
 
         protected virtual void DrawFootstepSoundsModule()
